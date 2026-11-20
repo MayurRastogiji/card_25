@@ -5,6 +5,6 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/card_25/',
+  base: '/anniversary-invitation/',
   plugins: [react(), tailwindcss()],
 })
