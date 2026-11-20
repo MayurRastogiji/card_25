@@ -25,7 +25,7 @@ export default function CouplePortrait() {
         style={{ y: imageY }}
       >
         <img
-          src="/card_25/images/couple-portrait.png"
+          src={`${import.meta.env.BASE_URL}images/couple-portrait.png`}
           alt="Couple portrait"
           className="w-full h-full object-cover object-top"
           loading="lazy"

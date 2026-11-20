@@ -72,7 +72,7 @@ export const HeroSection: React.FC = () => {
             <div className="relative overflow-hidden rounded-t-full rounded-b-3xl border-4 border-[#D4AF78] shadow-2xl bg-[#FFF9F5] p-2 mx-auto">
               <div className="relative overflow-hidden rounded-t-full rounded-b-2xl">
                 <img
-                  src="/images/couple-portrait.png"
+                  src={`${import.meta.env.BASE_URL}images/couple-portrait.png`}
                   alt={`${invitationData.couple.shortNames} celebrating their Silver Jubilee`}
                   className="w-full h-[320px] xs:h-[360px] sm:h-[400px] md:h-[440px] object-cover object-top filter brightness-[1.02] contrast-[1.02] transform transition-transform duration-700 group-hover:scale-105"
                   loading="eager"

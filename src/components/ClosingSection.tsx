@@ -68,7 +68,7 @@ export const ClosingSection: React.FC = () => {
         >
           <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white/95 border-2 border-[#D4AF78] shadow-md flex items-center justify-center p-1 relative mx-auto overflow-hidden">
             <img
-              src="/images/rd-monogram-emblem.png"
+              src={`${import.meta.env.BASE_URL}images/rd-monogram-emblem.png`}
               alt="Ritu & Dharmendra — Luxurious Gold R&D Monogram Emblem"
               className="w-full h-full object-cover rounded-full"
               loading="lazy"

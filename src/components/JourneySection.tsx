@@ -53,7 +53,7 @@ export const JourneySection: React.FC = () => {
 
                 <div className="overflow-hidden rounded-2xl bg-[#FFF9F5]">
                   <img
-                    src="/images/couple-portrait.png"
+                    src={`${import.meta.env.BASE_URL}images/couple-portrait.png`}
                     alt="Ritu and Dharmendra Rastogi 25 Years Journey"
                     className="w-full h-[300px] xs:h-[340px] sm:h-[380px] object-cover object-top filter saturate-[1.05] hover:scale-105 transition-transform duration-700"
                     loading="lazy"

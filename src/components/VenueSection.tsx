@@ -48,7 +48,7 @@ export const VenueSection: React.FC = () => {
               {/* Venue Photograph with Luxury Gold Border & Tag */}
               <div className="relative w-full h-44 sm:h-50 rounded-2xl overflow-hidden mb-4 border-2 border-[#D4AF78]/40 shadow-sm bg-[#FFF9F5]">
                 <img
-                  src="/images/venue-le-grande.jpg"
+                  src={`${import.meta.env.BASE_URL}images/venue-le-grande.jpg`}
                   alt="Le Grande Banquet Meerut"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-[1.02]"
                   loading="lazy"
