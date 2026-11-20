@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { assetPath } from '../../utils/assetPath';
+
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function CouplePortrait() {
@@ -25,7 +25,7 @@ export default function CouplePortrait() {
         style={{ y: imageY }}
       >
         <img
-          src={assetPath('images/couple-portrait.png')}
+          src="/card_25/images/couple-portrait.png"
           alt="Couple portrait"
           className="w-full h-full object-cover object-top"
           loading="lazy"
