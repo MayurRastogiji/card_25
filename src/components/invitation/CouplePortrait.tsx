@@ -25,7 +25,7 @@ export default function CouplePortrait() {
         style={{ y: imageY }}
       >
         <img
-          src={assetPath('assets/images/couple-portrait.png')}
+          src={assetPath('images/couple-portrait.png')}
           alt="Couple portrait"
           className="w-full h-full object-cover object-top"
           loading="lazy"
