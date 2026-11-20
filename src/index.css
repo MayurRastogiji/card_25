@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "./styles/animations.css";
+
+/* ============================================================
+   RITU & DHARMENDRA - SILVER JUBILEE LUXURY DESIGN SYSTEM
+   ============================================================ */
+
+:root {
+  /* Official Theme Colors */
+  --color-baby-pink: #F6DDE3;
+  --color-soft-blush: #FCECEF;
+  --color-ivory-white: #FFF9F5;
+  --color-champagne-gold: #D4AF78;
+  --color-champagne-light: #F3E3C3;
+  --color-champagne-dark: #B88D4E;
+  --color-dusty-rose: #C98996;
+  --color-warm-brown: #795044;
+
+  /* Additional luxury tints */
+  --color-pearl-white: #FFFFFF;
+  --color-deep-brown: #4A332B;
+  --color-rose-muted: #8E6870;
+
+  /* Typography */
+  --font-cormorant: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-montserrat: 'Montserrat', system-ui, -apple-system, sans-serif;
+
+  /* Gradients */
+  --gradient-gold: linear-gradient(135deg, #F3E3C3 0%, #D4AF78 50%, #B88D4E 100%);
+  --gradient-gold-h: linear-gradient(90deg, #B88D4E 0%, #F3E3C3 50%, #B88D4E 100%);
+  --gradient-blush-paper: linear-gradient(180deg, #FFF9F5 0%, #FCECEF 50%, #F6DDE3 100%);
+  --gradient-envelope: linear-gradient(160deg, #FCECEF 0%, #F6DDE3 60%, #E9C4CC 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 249, 245, 0.96) 0%, rgba(252, 236, 239, 0.92) 100%);
+
+  /* Shadows */
+  --shadow-gold: 0 4px 20px rgba(212, 175, 120, 0.25);
+  --shadow-envelope: 0 25px 60px -15px rgba(121, 80, 68, 0.2), 0 10px 30px -10px rgba(201, 137, 150, 0.25);
+  --shadow-card: 0 20px 50px -10px rgba(121, 80, 68, 0.12), 0 5px 15px rgba(201, 137, 150, 0.08);
+}
+
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--color-ivory-white);
+  color: var(--color-warm-brown);
+}
+
+body {
+  font-family: var(--font-montserrat);
+  background-color: var(--color-ivory-white);
+  color: var(--color-warm-brown);
+  line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Custom Typography Utilities */
+.font-cormorant {
+  font-family: var(--font-cormorant);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
+/* Color Utilities */
+.text-gold {
+  color: var(--color-champagne-gold);
+}
+
+.text-dusty-rose {
+  color: var(--color-dusty-rose);
+}
+
+.text-warm-brown {
+  color: var(--color-warm-brown);
+}
+
+.bg-baby-pink {
+  background-color: var(--color-baby-pink);
+}
+
+.bg-soft-blush {
+  background-color: var(--color-soft-blush);
+}
+
+.bg-ivory-white {
+  background-color: var(--color-ivory-white);
+}
+
+/* Luxury Gold Foil Border */
+.border-gold-foil {
+  border: 1px solid rgba(212, 175, 120, 0.45);
+  box-shadow: inset 0 0 12px rgba(212, 175, 120, 0.12);
+}
+
+.border-gold-ornamental {
+  border: 2px solid;
+  border-image: linear-gradient(135deg, #F3E3C3, #D4AF78, #B88D4E, #F3E3C3) 1;
+}
+
+/* Luxury Paper Texture Background Overlay */
+.luxury-paper-bg {
+  background-color: #FFF9F5;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(246, 221, 227, 0.35) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(252, 236, 239, 0.4) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 120, 0.04) 0%, transparent 60%);
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF9F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E0BBC5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C98996;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
