@@ -1,106 +1,58 @@
-// Romantic ambient Web Audio synthesizer & audio controller
+// Real audio player for the romantic background music
 
 class RomanticAudioEngine {
-  private ctx: AudioContext | null = null;
+  private audio: HTMLAudioElement | null = null;
+  private volume: number = 0.5;
   private isPlaying: boolean = false;
-  private intervalId: number | null = null;
-  private volume: number = 0.4;
-  private masterGain: GainNode | null = null;
 
-  private initContext() {
-    if (!this.ctx) {
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new AudioContextClass();
-      this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
-      this.masterGain.connect(this.ctx.destination);
-    }
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
+  private initAudio() {
+    if (this.audio) return;
 
-  // Plays a warm, gentle bell/harp note
-  private playNote(freq: number, duration: number = 2.5, velocity: number = 0.3) {
-    if (!this.ctx || !this.masterGain) return;
+    this.audio = new Audio();
 
-    const osc = this.ctx.createOscillator();
-    const noteGain = this.ctx.createGain();
-    const filter = this.ctx.createBiquadFilter();
+    // Try mpeg first (the actual file format), then mp3 as fallback alias
+    this.audio.src = `${import.meta.env.BASE_URL}audio/romantic-background.mpeg`;
+    this.audio.loop = true;
+    this.audio.volume = this.volume;
+    this.audio.preload = 'metadata';
 
-    // Warm sound design
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1400, this.ctx.currentTime);
-    filter.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + duration);
-
-    noteGain.gain.setValueAtTime(0, this.ctx.currentTime);
-    noteGain.gain.linearRampToValueAtTime(velocity * this.volume, this.ctx.currentTime + 0.08);
-    noteGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
-
-    osc.connect(filter);
-    filter.connect(noteGain);
-    noteGain.connect(this.masterGain);
-
-    osc.start();
-    osc.stop(this.ctx.currentTime + duration);
-  }
-
-  // Gentle romantic chord arpeggios (Key: F Major / D Minor romantic progression)
-  private playSequence() {
-    // F - A - C - E, C - E - G - B, D - F - A - C, Bb - D - F - A
-    const chords = [
-      [349.23, 440.0, 523.25, 659.25], // Fmaj7
-      [261.63, 329.63, 392.0, 493.88], // Cmaj7
-      [293.66, 349.23, 440.0, 523.25], // Dm7
-      [233.08, 293.66, 349.23, 440.0], // Bbmaj7
-    ];
-
-    let chordIndex = 0;
-    const playNextChord = () => {
-      if (!this.isPlaying) return;
-      const notes = chords[chordIndex % chords.length];
-      chordIndex++;
-
-      // Arpeggiate notes gracefully
-      notes.forEach((freq, idx) => {
-        setTimeout(() => {
-          if (this.isPlaying) {
-            this.playNote(freq, 3.2, 0.28);
-          }
-        }, idx * 600);
-      });
-    };
-
-    playNextChord();
-    this.intervalId = window.setInterval(playNextChord, 4200);
+    this.audio.addEventListener('error', () => {
+      console.warn('RomanticAudio: Failed to load audio file.');
+    });
   }
 
   public play() {
-    this.initContext();
-    this.isPlaying = true;
-    this.playSequence();
+    this.initAudio();
+    if (!this.audio) return;
+    this.audio.volume = this.volume;
+    const playPromise = this.audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          this.isPlaying = true;
+        })
+        .catch(() => {
+          // Autoplay blocked — user will need to click play manually
+          this.isPlaying = false;
+        });
+    }
   }
 
   public pause() {
+    if (!this.audio) return;
+    this.audio.pause();
     this.isPlaying = false;
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
   }
 
   public setVolume(vol: number) {
     this.volume = Math.max(0, Math.min(1, vol));
-    if (this.masterGain && this.ctx) {
-      this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+    if (this.audio) {
+      this.audio.volume = this.volume;
     }
   }
 
   public getIsPlaying(): boolean {
-    return this.isPlaying;
+    return this.isPlaying && this.audio !== null && !this.audio.paused;
   }
 
   public getVolume(): number {
@@ -109,3 +61,4 @@ class RomanticAudioEngine {
 }
 
 export const romanticAudio = new RomanticAudioEngine();
+

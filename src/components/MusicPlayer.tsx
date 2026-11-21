@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Music, Pause, Play } from 'lucide-react';
 import { romanticAudio } from '../utils/romanticAudio';
 
@@ -8,11 +8,13 @@ interface MusicPlayerProps {
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoStart = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.4);
+  const [volume, setVolume] = useState(0.5);
   const [showVolume, setShowVolume] = useState(false);
+  const autoStartedRef = useRef(false);
 
   useEffect(() => {
-    if (autoStart) {
+    if (autoStart && !autoStartedRef.current) {
+      autoStartedRef.current = true;
       romanticAudio.play();
       setIsPlaying(true);
     }
@@ -39,8 +41,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoStart = false }) =
       romanticAudio.setVolume(0);
       setVolume(0);
     } else {
-      romanticAudio.setVolume(0.4);
-      setVolume(0.4);
+      romanticAudio.setVolume(0.5);
+      setVolume(0.5);
     }
   };
 
@@ -50,7 +52,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoStart = false }) =
       <button
         onClick={togglePlay}
         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FCECEF] hover:bg-[#F6DDE3] text-[#795044] flex items-center justify-center transition-colors cursor-pointer shrink-0"
-        aria-label={isPlaying ? 'Pause romantic instrumental music' : 'Play romantic instrumental music'}
+        aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
         {isPlaying ? (
           <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#B88D4E]" />
@@ -63,7 +65,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoStart = false }) =
       <div className="flex items-center gap-1.5 px-0.5 select-none">
         <Music className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${isPlaying ? 'text-[#D4AF78] animate-pulse' : 'text-[#795044]/50'}`} />
         <span className="font-montserrat text-[9px] sm:text-[10px] uppercase tracking-wider text-[#795044] font-medium hidden xs:inline">
-          {isPlaying ? 'Music' : 'Paused'}
+          {isPlaying ? 'Playing' : 'Music'}
         </span>
       </div>
 
@@ -100,3 +102,4 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoStart = false }) =
     </div>
   );
 };
+

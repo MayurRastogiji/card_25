@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { invitationData } from '../data/invitation';
+import { FloatingPetals } from './ui/FloatingPetals';
 import { GaneshMotif, FloralCorner } from './ui/Ornaments';
 
 interface EnvelopeOpeningProps {
@@ -41,7 +42,9 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center min-h-[100dvh] w-full overflow-hidden bg-[#FFF9F5] luxury-paper-bg px-4 select-none text-center">
-      {/* Background ambient radial glow */}
+      {/* Add cherry blossom background to the envelope opening screen */}
+      <FloatingPetals />
+
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
         <motion.div
           animate={{
